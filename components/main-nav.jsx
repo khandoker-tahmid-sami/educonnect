@@ -1,12 +1,11 @@
 "use client";
 
-import { MobileNav } from "@/components/mobile-nav";
-import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { MobileNav } from "@/components/mobile-nav";
 import { Logo } from "./logo";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { X, Menu } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
@@ -14,110 +13,125 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function MainNav({ items = [], children }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
-    <>
-      {/* ✅ one single row that controls the whole navbar */}
-      <div className="w-full flex items-center justify-between gap-4">
-        {/* Left: logo + desktop links */}
-        <div className="flex items-center gap-6 lg:gap-10">
-          <Link href="/" aria-label="Home">
-            <Logo />
+    /* single, non-wrapping row */
+    <div className="w-full flex flex-nowrap items-center justify-between gap-4">
+      {/* Left: logo + desktop links */}
+      <div className="min-w-0 flex items-center gap-6 lg:gap-10">
+        <Link
+          href="/"
+          aria-label="Home"
+          className="shrink-0 inline-flex items-center"
+        >
+          <Logo className="h-6 w-auto" />
+        </Link>
+
+        {!!items.length && (
+          <nav className="hidden lg:flex gap-6">
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.disabled ? "#" : item.href}
+                className={cn(
+                  "text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+                )}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </nav>
+        )}
+      </div>
+
+      {/* Right: actions */}
+      <nav className="flex items-center gap-3 shrink-0">
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="/login"
+            className={cn(buttonVariants({ size: "sm" }), "px-4")}
+          >
+            Login
           </Link>
-
-          {items.length > 0 && (
-            <nav className="hidden lg:flex items-center gap-6">
-              {items.map((item, i) => (
-                <Link
-                  key={i}
-                  href={item.disabled ? "#" : item.href}
-                  className={cn(
-                    "text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  )}
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
-          )}
-        </div>
-
-        {/* Right: auth buttons + avatar + hamburger */}
-        <div className="flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-3">
-            <Link
-              href="/login"
-              className={cn(buttonVariants({ size: "sm" }), "px-4")}
-            >
-              Login
-            </Link>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  Register
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 mt-2">
-                <DropdownMenuItem asChild>
-                  <Link href="">Student</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="">Instructor</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </button>
+              <Button variant="outline" size="sm">
+                Register
+              </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 mt-2">
+            <DropdownMenuContent align="end" className="mt-2 w-56">
               <DropdownMenuItem asChild>
-                <Link href="/account">Profile</Link>
+                <Link href="/register/student" className="w-full">
+                  Student
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/account/enrolled-courses">My Courses</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="">Testimonials & Certificates</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="">Logout</Link>
+                <Link href="/register/instructor" className="w-full">
+                  Instructor
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
-          <button
-            className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border"
-            onClick={() => setShowMobileMenu((s) => !s)}
-            aria-label="Toggle menu"
-          >
-            {showMobileMenu ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile menu overlay (doesn't affect the row layout) */}
-      {showMobileMenu && items.length > 0 && (
-        <MobileNav items={items}>{children}</MobileNav>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="cursor-pointer rounded-full focus:outline-none">
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="mt-2 w-56">
+            <DropdownMenuItem asChild>
+              <Link href="/account" className="w-full">
+                Profile
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/account/enrolled-courses" className="w-full">
+                My Courses
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/account/certificates" className="w-full">
+                Testimonials & Certificates
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/logout" className="w-full">
+                Logout
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <button
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border lg:hidden"
+          onClick={() => setShowMobileMenu((s) => !s)}
+          aria-label="Toggle menu"
+        >
+          {showMobileMenu ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </nav>
+
+      {/* Mobile sheet (doesn't take layout space) */}
+      {showMobileMenu && !!items.length && (
+        <div className="absolute left-0 right-0 top-full mt-2 mx-4 rounded-xl border bg-background/95 p-4 backdrop-blur lg:hidden">
+          <MobileNav items={items} onNavigate={() => setShowMobileMenu(false)}>
+            {children}
+          </MobileNav>
+        </div>
       )}
-    </>
+    </div>
   );
 }
