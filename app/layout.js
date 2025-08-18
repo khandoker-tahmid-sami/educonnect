@@ -1,7 +1,8 @@
-import { Inter, Poppins } from "next/font/google";
-import "./globals.css";
 import { cn } from "@/lib/utils";
+import { dbConnect } from "@/service/connectMongo";
+import { Inter, Poppins } from "next/font/google";
 import { Toaster } from "sonner";
+import "./globals.css";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -20,7 +21,10 @@ export const metadata = {
   description: "You can increase your productivity",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const conn = await dbConnect();
+  // console.log(conn);
+  // console.log("connection established");
   return (
     <html lang="en">
       <body className={cn(inter.className, poppins.className)}>
