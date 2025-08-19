@@ -3,101 +3,30 @@ import { SectionTitle } from "@/components/section-title";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
 import { cn } from "@/lib/utils";
-import { getCourseList } from "@/queries/courses";
+// import { getCourseList } from "@/queries/courses";
 import { ArrowRight, ArrowRightIcon, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const categories = [
-  {
-    id: 1,
-    title: "Design",
-    thumbnail: "/assets/images/categories/design.jpg",
-  },
-
-  {
-    id: 3,
-    title: "Development",
-    thumbnail: "/assets/images/categories/development.jpg",
-  },
-  {
-    id: 4,
-    title: "Marketing",
-    thumbnail: "/assets/images/categories/marketing.jpg",
-  },
-  {
-    id: 5,
-    title: "IT & Software",
-    thumbnail: "/assets/images/categories/it_software.jpg",
-  },
-  {
-    id: 6,
-    title: "Personal Development",
-    thumbnail: "/assets/images/categories/personal_development.jpg",
-  },
-  {
-    id: 7,
-    title: "Business",
-    thumbnail: "/assets/images/categories/business.jpg",
-  },
-  {
-    id: 8,
-    title: "Photography",
-    thumbnail: "/assets/images/categories/photography.jpg",
-  },
-  {
-    id: 9,
-    title: "Music",
-    thumbnail: "/assets/images/categories/music.jpg",
-  },
-];
-
-const courses = [
-  {
-    id: 1,
-    title: "Design",
-    thumbnail: "/assets/images/categories/design.jpg",
-  },
-
-  {
-    id: 3,
-    title: "Development",
-    thumbnail: "/assets/images/categories/development.jpg",
-  },
-  {
-    id: 4,
-    title: "Marketing",
-    thumbnail: "/assets/images/categories/marketing.jpg",
-  },
-  {
-    id: 5,
-    title: "IT & Software",
-    thumbnail: "/assets/images/categories/it_software.jpg",
-  },
-  {
-    id: 6,
-    title: "Personal Development",
-    thumbnail: "/assets/images/categories/personal_development.jpg",
-  },
-  {
-    id: 7,
-    title: "Business",
-    thumbnail: "/assets/images/categories/business.jpg",
-  },
-  {
-    id: 8,
-    title: "Photography",
-    thumbnail: "/assets/images/categories/photography.jpg",
-  },
-  {
-    id: 9,
-    title: "Music",
-    thumbnail: "/assets/images/categories/music.jpg",
-  },
-];
 const HomePage = async () => {
-  const courses = await getCourseList();
+  const base = process.env.NEXT_PUBLIC_APP_URL;
+
+  const [coursesResponse, categoriesResponse] = await Promise.all([
+    fetch(`${base}/api/courses/get`, {
+      cache: "no-store",
+    }),
+    fetch(`${base}/api/categories/get`, {
+      cache: "no-store",
+    }),
+  ]);
+
+  if (!coursesResponse.ok) throw new Error("Failed to load course");
+  if (!categoriesResponse.ok) throw new Error("Failed to load categories");
+
+  const { data: courses } = await coursesResponse.json();
+  const { data: categories } = await categoriesResponse.json();
   console.log(courses);
+  console.log(categories);
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 grainy">
@@ -161,12 +90,12 @@ const HomePage = async () => {
                 className="relative overflow-hidden rounded-lg border border-border/15 dark:border-white/10 bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6">
-                  <Image
+                  {/* <Image
                     src={category.thumbnail}
                     alt={category.title}
                     width={100}
                     height={100}
-                  />
+                  /> */}
                   <h3 className="font-bold">{category.title}</h3>
                 </div>
               </Link>

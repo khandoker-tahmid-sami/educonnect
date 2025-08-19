@@ -4,8 +4,10 @@ import { Course } from "@/model/course-model";
 import { Module } from "@/model/module.model";
 import { Testimonial } from "@/model/testimonial-model";
 import { User } from "@/model/user-model";
+import { dbConnect } from "@/service/connectMongo";
 
 export async function getCourseList() {
+  await dbConnect();
   const courses = await Course.find({})
     .select([
       "title",
