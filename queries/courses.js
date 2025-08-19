@@ -1,11 +1,21 @@
+import { replaceMongoIdInArray } from "@/lib/convertData";
 import { Category } from "@/model/category-model";
 import { Course } from "@/model/course-model";
 import { Module } from "@/model/module.model";
 import { Testimonial } from "@/model/testimonial-model";
 import { User } from "@/model/user-model";
 
-export const getAllCourses = async () => {
-  const courses = await Course.find()
+export async function getCourseList() {
+  const courses = await Course.find({})
+    .select([
+      "title",
+      "subtitle",
+      "thumbnail",
+      "modules",
+      "price",
+      "category",
+      "instructor",
+    ])
     .populate({
       path: "category",
       model: Category,
@@ -15,13 +25,13 @@ export const getAllCourses = async () => {
       model: User,
     })
     .populate({
-      path: "modules",
-      model: Module,
-    })
-    .populate({
       path: "testimonials",
       model: Testimonial,
     })
+    .populate({
+      path: "modules",
+      model: Module,
+    })
     .lean();
-  return courses;
-};
+  return replaceMongoIdInArray(courses);
+}

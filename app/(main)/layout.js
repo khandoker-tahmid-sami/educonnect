@@ -1,4 +1,4 @@
-// import { MainNav } from "@/components/main-nav";
+import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 const navLinks = [
   {
@@ -21,7 +21,12 @@ const navLinks = [
 const MainLayout = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col">
-      <main className="flex-1">{children}</main>
+      <header className="z-40 bg-background/60 backdrop-blur-md fixed top-0 left-0 right-0">
+        <div className="container flex h-20 items-center justify-between py-6 ">
+          <MainNav items={navLinks} />
+        </div>
+      </header>
+      <main className="flex-1 pt-20 flex flex-col">{children}</main>
       <SiteFooter />
     </div>
   );

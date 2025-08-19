@@ -1,11 +1,12 @@
 // import { CourseProgress } from "@/components/course-progress";
-// import { SectionTitle } from "@/components/section-title";
-// import { Button, buttonVariants } from "@/components/ui/button";
-// import { formatPrice } from "@/lib/formatPrice";
-// import { cn } from "@/lib/utils";
-// import { ArrowRight, ArrowRightIcon, BookOpen } from "lucide-react";
-// import Image from "next/image";
-// import Link from "next/link";
+import { SectionTitle } from "@/components/section-title";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { formatPrice } from "@/lib/formatPrice";
+import { cn } from "@/lib/utils";
+import { getCourseList } from "@/queries/courses";
+import { ArrowRight, ArrowRightIcon, BookOpen } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const categories = [
   {
@@ -94,10 +95,12 @@ const courses = [
     thumbnail: "/assets/images/categories/music.jpg",
   },
 ];
-const HomePage = () => {
+const HomePage = async () => {
+  const courses = await getCourseList();
+  console.log(courses);
   return (
     <>
-      {/* <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 grainy">
+      <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 grainy">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center relative isolate">
           <div
             aria-hidden="true"
@@ -133,9 +136,9 @@ const HomePage = () => {
             </Link>
           </div>
         </div>
-      </section> */}
+      </section>
       {/* Categories Section */}
-      {/* <section
+      <section
         id="categories"
         className="container space-y-6  py-8  md:py-12 lg:py-24"
       >
@@ -155,7 +158,7 @@ const HomePage = () => {
               <Link
                 href=""
                 key={category.id}
-                className="relative overflow-hidden rounded-lg border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
+                className="relative overflow-hidden rounded-lg border border-border/15 dark:border-white/10 bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
               >
                 <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6">
                   <Image
@@ -170,10 +173,10 @@ const HomePage = () => {
             );
           })}
         </div>
-      </section> */}
+      </section>
 
       {/* Courses */}
-      {/* <section id="courses" className="container space-y-6   md:py-12 lg:py-24">
+      <section id="courses" className="container space-y-6   md:py-12 lg:py-24">
         <div className="flex items-center justify-between">
           <SectionTitle>Courses</SectionTitle>
           <Link
@@ -210,11 +213,11 @@ const HomePage = () => {
                       </div>
                     </div>
 
-                    <CourseProgress
+                    {/* <CourseProgress
                       size="sm"
                       value={80}
                       variant={110 === 100 ? "success" : ""}
-                    />
+                    /> */}
 
                     <div className="flex items-center justify-between mt-4">
                       <p className="text-md md:text-sm font-medium text-slate-700">
@@ -235,7 +238,7 @@ const HomePage = () => {
             );
           })}
         </div>
-      </section> */}
+      </section>
     </>
   );
 };
