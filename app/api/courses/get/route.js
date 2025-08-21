@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { getCourseList } from "@/queries/courses";
+import { NextResponse } from "next/server";
 
 export const runtime = "nodejs"; //Forces the route to run on Node.js runtime, not Edge.
 export const dynamic = "force-dynamic"; //Tells Next.js not to cache this route at build time or via ISR.
@@ -11,7 +11,7 @@ export const GET = async () => {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { success: false, error: err?.message ?? "Internal Server Error" },
+      { success: false, error: error?.message ?? "Internal Server Error" },
       { status: 500 }
     );
   }

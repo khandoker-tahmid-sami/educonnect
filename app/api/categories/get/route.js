@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { getCategories } from "@/queries/categories";
+import { NextResponse } from "next/server";
 
 export const GET = async () => {
   try {
@@ -11,7 +11,7 @@ export const GET = async () => {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { success: false, error: err?.message ?? "Internal Server Error" },
+      { success: false, error: error?.message ?? "Internal Server Error" },
       { status: 500 }
     );
   }

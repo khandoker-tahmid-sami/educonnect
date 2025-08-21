@@ -1,9 +1,42 @@
-[{
-  "_id": {
-    "$oid": "664813cc6fe803e9128d7fae"
+[
+  {
+    "title": "Development",
+    "description": "Developments Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/development_lrevj9.jpg"
   },
-  "title": "Development",
-  "description": "Developments Courses",
-  "thumbnail": "development.jpg",
-  "__v": 0
-}]
+  {
+    "title": "Design",
+    "description": "Design Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/design_kqmsvf.jpg"
+  },
+  {
+    "title": "Music",
+    "description": "Music Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/music_mystig.jpg"
+  },
+  {
+    "title": "Marketing",
+    "description": "Marketing Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/marketing_tw2clp.jpg"
+  },
+  {
+    "title": "IT Software",
+    "description": "IT Software Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/it_software_otlbua.jpg"
+  },
+  {
+    "title": "Personal Development",
+    "description": "Personal Development Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/personal_development_konvzq.jpg"
+  },
+  {
+    "title": "Photography",
+    "description": "Photography Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/photography_kvhpup.jpg"
+  },
+  {
+    "title": "Business Administration",
+    "description": "Business Administration Courses",
+    "thumbnail": "https://res.cloudinary.com/dlxipkuqw/image/upload/v1755639032/business_ecube5.jpg"
+  }
+]
