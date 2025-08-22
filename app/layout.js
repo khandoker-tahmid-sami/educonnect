@@ -22,8 +22,11 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={cn(inter.className, poppins.className)}>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(inter.className, poppins.className)}
+        suppressHydrationWarning
+      >
         {children}
         <Toaster richColors position="top-center" />
       </body>
