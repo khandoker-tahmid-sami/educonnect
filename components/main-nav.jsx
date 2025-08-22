@@ -48,22 +48,25 @@ export function MainNav({ items, children }) {
         <div className="items-center gap-3 hidden lg:flex">
           <Link
             href="/login"
-            className={cn(buttonVariants({ size: "sm" }), "px-4")}
+            className={cn(
+              buttonVariants({ size: "sm", variant: "hero" }),
+              "px-4"
+            )}
           >
             Login
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm">
+              <Button variant="heroOutline" size="sm">
                 Register
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56 mt-4">
               <DropdownMenuItem className="cursor-pointer">
-                <Link href="">Student</Link>
+                <Link href="/register/student">Student</Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
-                <Link href="">Instructor</Link>
+                <Link href="/register/instructor">Instructor</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
