@@ -18,24 +18,36 @@ export const {
 
         try {
           await dbConnect();
-          const user = await User.findOne({ email: credentials?.email });
+          const user = await User.findOne({ email: credentials?.email }).lean();
           console.log(user);
-          if (user) {
-            const isMatch = await bcrypt.compare(
-              credentials?.password,
-              user?.password
-            );
 
-            if (isMatch) {
-              return user;
-            } else {
-              console.error("password mismatch");
-              throw new Error("Check your password");
-            }
-          } else {
-            console.error("user not found");
-            throw new Error("User not found");
-          }
+          if (!user) return null;
+
+          const isMatch = await bcrypt.compare(
+            credentials?.password,
+            user?.password
+          );
+
+          if (!isMatch) return null;
+
+          return user;
+
+          // if (user) {
+          //   const isMatch = await bcrypt.compare(
+          //     credentials?.password,
+          //     user?.password
+          //   );
+
+          //   if (isMatch) {
+          //     return user;
+          //   } else {
+          //     console.error("password mismatch");
+          //     throw new Error("Check your password");
+          //   }
+          // } else {
+          //   console.error("user not found");
+          //   throw new Error("User not found");
+          // }
         } catch (error) {
           console.log(error);
         }

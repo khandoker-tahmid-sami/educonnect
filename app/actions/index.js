@@ -10,8 +10,12 @@ export const credentialLogin = async (formData) => {
       redirect: false,
     });
 
-    return response;
-  } catch (error) {
-    throw new Error(error);
+    if (response?.error) {
+      // NextAuth exposes only "CredentialsSignin"
+      return { error: "Invalid email or password." };
+    }
+    return { ok: true };
+  } catch (e) {
+    return { error: "Something went wrong. Please try again." };
   }
 };
