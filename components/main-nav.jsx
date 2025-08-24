@@ -2,10 +2,11 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { MobileNav } from "@/components/mobile-nav";
 import { Menu, X } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 import { Logo } from "./logo";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button, buttonVariants } from "./ui/button";
@@ -15,7 +16,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { useSession, signOut } from "next-auth/react";
 
 export function MainNav({ items, children }) {
   const { data: session } = useSession();
@@ -97,19 +97,23 @@ export function MainNav({ items, children }) {
               </Avatar>
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56 mt-4">
+          <DropdownMenuContent align="end" className="w-56 mt-4 bg-white">
             <DropdownMenuItem className="cursor-pointer" asChild>
-              <Link href="account">Profile</Link>
+              <Link href="/account">Profile</Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer" asChild>
-              <Link href="account/enrolled-courses">My Courses</Link>
+              <Link href="/account/enrolled-courses">My Courses</Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer" asChild>
               <Link href="">Testimonials & Certificates</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer" asChild>
-              <Link href="#" onClick={() => signOut()}>Logout</Link>
-            </DropdownMenuItem>
+            {loginSession && (
+              <DropdownMenuItem className="cursor-pointer" asChild>
+                <Link href="#" onClick={() => signOut()}>
+                  Logout
+                </Link>
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
         <button

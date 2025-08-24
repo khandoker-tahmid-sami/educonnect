@@ -15,7 +15,14 @@ export const credentialLogin = async (formData) => {
       return { error: "Invalid email or password." };
     }
     return { ok: true };
-  } catch (e) {
+  } catch (error) {
     return { error: "Something went wrong. Please try again." };
   }
+};
+
+export const doSocialLogin = async (formData) => {
+  const action = formData.get("action");
+  await signIn(action, {
+    redirectTo: "/courses",
+  });
 };

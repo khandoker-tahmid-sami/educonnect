@@ -9,8 +9,6 @@ export const POST = async (request) => {
 
   console.log(firstName, lastName, email, password, userRole);
 
-  await dbConnect();
-
   const hashedPassword = await bcrypt.hash(password, 5);
 
   const newUser = {
@@ -24,16 +22,30 @@ export const POST = async (request) => {
   console.log(newUser);
 
   try {
-    await User.create(newUser);
-    return NextResponse.json(
-      {
-        success: true,
-        message: `User with this email ${email} has been created`,
-      },
-      { status: 201 }
-    );
+    await dbConnect();
+
+    const exists = await User.findOne({ email: email }).lean();
+    if (exists) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `User with this email ${email} has already exist.`,
+        },
+        { status: 409 }
+      );
+    } else {
+      await User.create(newUser);
+      return NextResponse.json(
+        {
+          success: true,
+          message: `User with this email ${email} has been created`,
+        },
+        { status: 201 }
+      );
+    }
+
     // return new NextResponse("user has been created", { status: 201 });
-  } catch (e) {
+  } catch (error) {
     console.log(e.message);
     return NextResponse.json(
       {
