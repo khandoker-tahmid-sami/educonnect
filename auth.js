@@ -1,10 +1,26 @@
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GituhbProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { authConfig } from "./auth.config";
 import { User } from "./model/user-model";
 import { dbConnect } from "./service/connectMongo";
+
+const refreshAccessToken = async (token) => {
+  try {
+    const url =
+      "https://oauth2.googleapis.com/token" +
+      new URLSearchParams({
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        grant_type: "refresh_token",
+        refresh_token: token.refreshToken,
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const {
   auth,
@@ -66,5 +82,35 @@ export const {
         },
       },
     }),
+    GituhbProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
   ],
+  callbacks: {
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        return {
+          accessToken: account?.access_token,
+          accessTokenExpires: Date.now() + account?.expires_in * 1000,
+          refreshToken: account?.refresh_token,
+          user,
+        };
+      }
+
+      if (Date.now() < token?.accessTokenExpires) {
+        return token;
+      }
+
+      return refreshAccessToken(token); //this function will be different from providers to providers. Other things are same.
+    },
+    async session({ session, token }) {},
+  },
 });
