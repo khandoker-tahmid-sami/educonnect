@@ -62,11 +62,7 @@ const SingleCoursePage = async ({ params }) => {
   return (
     <>
       {/* course details introduction */}
-      <CourseDetailsIntro
-        title={course?.title}
-        subtitle={course?.subtitle}
-        thumbnail={course?.thumbnail}
-      />
+      <CourseDetailsIntro course={course} />
 
       {/* full course details */}
       <CourseDetails course={course} />
