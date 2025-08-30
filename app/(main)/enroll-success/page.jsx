@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
-import { sendEmails } from "@/lib/emails";
+// import { sendEmail } from "@/lib/nodemailer";
 import { stripe } from "@/lib/stripe";
 import { CircleCheck } from "lucide-react";
 import { headers as nextHeaders } from "next/headers";
@@ -63,6 +63,7 @@ const Success = async ({ searchParams }) => {
     //send mails
     const instructorName = `${course?.instructor?.firstName} ${course?.instructor?.lastName}`;
     const instructorEmail = `${course.instructor.email}`;
+    const courseURL = `${origin}/courses/${courseId} `;
     // console.log(instructorEmail, customerEmail);
     const emailsToSend = [
       {
@@ -73,23 +74,12 @@ const Success = async ({ searchParams }) => {
       {
         to: customerEmail,
         subject: `Enrollment Success for ${courseName}`,
-        message: `Hey ${customerName} You have successfully enrolled for the course ${courseName}`,
+        message: `Hey ${customerName} You have successfully enrolled for the course <strong>${courseName}</strong>. Go to the course here: <a href="${courseURL}">${courseURL}</a>`,
       },
     ];
 
-    const results = await sendEmails(emailsToSend);
-    for (const r of results) {
-      if (r.status === "rejected") {
-        console.error(
-          "Send failed:",
-          r.reason?.name,
-          r.reason?.statusCode,
-          r.reason?.message
-        );
-      } else {
-        console.log("Send ok:", r.value);
-      }
-    }
+    // const results = await sendEmail(emailsToSend);
+    // console.log(results);
   }
 
   return (
