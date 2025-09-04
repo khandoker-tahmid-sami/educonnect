@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export const GET = async (_req, { params }) => {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     if (!isValidObjectId(id)) {
       return NextResponse.json(

@@ -46,7 +46,7 @@ export const POST = async (request) => {
 
     // return new NextResponse("user has been created", { status: 201 });
   } catch (error) {
-    console.log(e.message);
+    console.log(error.message);
     return NextResponse.json(
       {
         success: false,

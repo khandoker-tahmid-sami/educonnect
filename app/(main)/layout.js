@@ -4,6 +4,10 @@ import { SessionProvider } from "next-auth/react";
 
 const navLinks = [
   {
+    title: "Courses",
+    href: "/courses",
+  },
+  {
     title: "Features",
     href: "/#features",
   },

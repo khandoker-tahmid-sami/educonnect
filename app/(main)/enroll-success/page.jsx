@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
-// import { sendEmail } from "@/lib/nodemailer";
+import { sendEmail } from "@/lib/nodemailer";
 import { stripe } from "@/lib/stripe";
 import { CircleCheck } from "lucide-react";
 import { headers as nextHeaders } from "next/headers";
@@ -15,6 +15,7 @@ const Success = async ({ searchParams }) => {
     throw new Error("please provide a valid session id that starts with cs_");
 
   const userSession = await auth();
+  console.log(userSession);
 
   if (!userSession?.user?.email) {
     redirect("/login");
@@ -41,7 +42,7 @@ const Success = async ({ searchParams }) => {
     userRes.json(),
   ]);
 
-  // console.log(course, user);
+  console.log(course, user);
 
   const customerName = `${user.firstName} ${user.lastName}`;
   const customerEmail = user.email;
@@ -60,6 +61,24 @@ const Success = async ({ searchParams }) => {
   // console.log(paymentStatus);
 
   if (paymentStatus === "succeeded") {
+    //update db
+    try {
+      const resonse = await fetch(`${origin}/api/enrollments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseId: course?.id,
+          studentId: user?.id,
+          paymentMethod: "stripe",
+        }),
+      });
+
+      const data = await resonse.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+
     //send mails
     const instructorName = `${course?.instructor?.firstName} ${course?.instructor?.lastName}`;
     const instructorEmail = `${course.instructor.email}`;
@@ -78,8 +97,8 @@ const Success = async ({ searchParams }) => {
       },
     ];
 
-    // const results = await sendEmail(emailsToSend);
-    // console.log(results);
+    const results = await sendEmail(emailsToSend);
+    console.log(results);
   }
 
   return (
@@ -93,10 +112,10 @@ const Success = async ({ searchParams }) => {
               was Successful for <strong>{courseName}</strong>
             </h1>
             <div className="flex items-center gap-3">
-              <Button asChild size="sm">
+              <Button asChild size="sm" variant={"heroOutline"}>
                 <Link href="/courses">Browse Courses</Link>
               </Button>
-              <Button asChild variant="outline" size="sm">
+              <Button asChild variant="hero" size="sm">
                 <Link href="/think-in-a-redux-way/introduction">
                   Play Course
                 </Link>
@@ -105,7 +124,7 @@ const Success = async ({ searchParams }) => {
           </>
         ) : (
           <>
-            <Button variant="outline" size="sm">
+            <Button variant="hero" size="sm">
               Try again
             </Button>
           </>

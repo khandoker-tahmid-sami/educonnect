@@ -6,19 +6,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
 export const EnrollCourse = ({ asLink, course }) => {
-  //   const formAction = async (data) => {
-  //     //call server action of stripe
-  //     "use server";
-  //     const { url } = await createCheckoutSession(data);
-  //     window.location.assign(url);
-  //   };
-
-  //   async function onSubmit(e) {
-  //     e.preventDefault();
-  //     const { url } = await createCheckoutSession(); // server action call
-  //     window.location.assign(url); // ✅ runs in client
-  //   }
-  console.log(course);
+  // console.log(course);
   const formAction = async (data) => {
     const { url } = await createCheckoutSession(data);
     window.location.assign(url);
@@ -28,8 +16,9 @@ export const EnrollCourse = ({ asLink, course }) => {
     <>
       <form action={formAction}>
         <input type="hidden" name="courseId" value={course?.id} />
-        <input type="hidden" name="courseName" value={course?.title} />
-        <input type="hidden" name="coursePrice" value={course?.price} />
+        {/* <input type="hidden" name="courseName" value={course?.title} />
+        <input type="hidden" name="coursePrice" value={course?.price} /> */}
+        {/* this two input can be malicious. thats wy I did not pass through formData.Rather I used api in stripe.js file */}
         {asLink ? (
           <Button
             type="submit"

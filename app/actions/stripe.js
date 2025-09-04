@@ -7,15 +7,22 @@ const CURRENCY = "nok";
 
 import { headers } from "next/headers";
 
-
-
 export const createCheckoutSession = async (data) => {
   const ui_mode = "hosted";
   const origin = (await headers()).get("origin");
 
   const courseId = data.get("courseId");
-  const courseName = data.get("courseName");
-  const coursePrice = data.get("coursePrice");
+
+  //call api to fetch single course using courseId
+  const response = await fetch(`${origin}/api/courses/${courseId}`);
+
+  const { data: course } = await response.json();
+
+  if (!course) return new Error("course not found");
+  console.log(course);
+
+  const courseName = course?.title;
+  const coursePrice = course?.price;
 
   const checkoutSession = await stripe.checkout.sessions.create({
     mode: "payment",
@@ -48,7 +55,14 @@ export const createCheckoutSession = async (data) => {
 };
 
 export const createPaymentIntent = async (data) => {
-  const coursePrice = data.get("coursePrice");
+  const courseId = data.get("courseId");
+
+  const response = await fetch(`${origin}/api/courses/${courseId}`);
+
+  const { data: course } = await response.json();
+  console.log(course);
+
+  const coursePrice = course?.price;
   const paymentIntent = await stripe.paymentIntents.create({
     amount: formatAmountForStripe(coursePrice, CURRENCY),
     automatic_payment_methods: { enabled: true },
