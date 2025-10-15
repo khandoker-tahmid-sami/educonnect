@@ -35,19 +35,20 @@ Follow these steps to set up the project locally:
 
 ## 1. Clone the repository
 
-````git clone https://github.com/khandoker-tahmid-sami/educonnect.git
-cd educonnect```
-
-## 2. Navigate into the project directory
-
+```
+git clone https://github.com/khandoker-tahmid-sami/educonnect.git
 cd educonnect
+```
 
 ## 3. Install project dependencies
 
+```
 npm install
+```
 
 ## 4. Configure environment variables
 
+```
 MONGO_URI = your_mongodb_uri
 
 GOOGLE_CLIENT_ID = your_google_client_id
@@ -69,12 +70,16 @@ STRIPE_SECRET_KEY = your_stripe_secret_key
 NODEMAILER_EMAIL = your_email
 
 NODEMAILER_APP_PASS = your_app_pass
+```
 
 ## 5. Start the development server
 
+```
 npm run dev
+```
 
 ## 6. Open yout browser and go to
 
+```
 http://localhost:3000
-````
+```
