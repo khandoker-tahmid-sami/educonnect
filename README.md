@@ -35,8 +35,8 @@ Follow these steps to set up the project locally:
 
 ## 1. Clone the repository
 
-git clone https://github.com/khandoker-tahmid-sami/educonnect.git
-cd educonnect
+````git clone https://github.com/khandoker-tahmid-sami/educonnect.git
+cd educonnect```
 
 ## 2. Navigate into the project directory
 
@@ -77,3 +77,4 @@ npm run dev
 ## 6. Open yout browser and go to
 
 http://localhost:3000
+````
