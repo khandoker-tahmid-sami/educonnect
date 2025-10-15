@@ -1,4 +1,4 @@
-# E-learning Portal
+# EduConnect
 
 **Ecovista** is a dynamic and responsive weather dashboard application built with **Next.js**, **Tailwind CSS**, and the **App Router** architecture. It fetches real-time environmental data like air quality, temperature, wind speed, and current weather conditions based on the user's location or a selected city.
 
@@ -24,11 +24,10 @@
 
 - **Next.js (App Router)**
 - **Tailwind CSS**
-- **React (Client Components)**
-- **OpenWeatherMap API**
-- **TimeZoneDB API**
-- **BigDataCloud API**
-- **JavaScript (ES6+)**
+- **MongoDB & Mongoose**
+- **JWT Authentication**
+- **Stripe** (payment integration)
+- **Cloudinary** (file uploads)
 
 ## Installation
 
@@ -36,20 +35,44 @@ Follow these steps to set up the project locally:
 
 ## 1. Clone the repository
 
-git clone https://github.com/khandoker-tahmid-sami/Ecovista.git
+git clone https://github.com/khandoker-tahmid-sami/educonnect.git
 
 ## 2. Navigate into the project directory
 
-cd Ecovista
+cd educonnect
 
 ## 3. Install project dependencies
 
 npm install
 
-## 4. Start the development server
+## 4. Configure environment variables
+
+MONGO_URI = your_mongodb_uri
+
+GOOGLE_CLIENT_ID = your_google_client_id
+
+GOOGLE_CLIENT_SECRET = your_google_client_secret
+
+GITHUB_CLIENT_ID = your_github_client_id
+
+GITHUB_CLIENT_SECRET = your_github_client_secret
+
+AUTH_SECRET = your_auth_secret
+
+AUTH_TRUST_HOST=true
+
+STRIPE_PUBLISHABLE_KEY = your_stripe_publishable_key
+
+STRIPE_SECRET_KEY = your_stripe_secret_key
+
+NODEMAILER_EMAIL = your_email
+
+NODEMAILER_APP_PASS = your_app_pass
+
+## 5. Start the development server
 
 npm run dev
 
-## 5. Open yout browser and go to
+## 6. Open yout browser and go to
 
 http://localhost:3000
