@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-learning Portal
 
-## Getting Started
+**Ecovista** is a dynamic and responsive weather dashboard application built with **Next.js**, **Tailwind CSS**, and the **App Router** architecture. It fetches real-time environmental data like air quality, temperature, wind speed, and current weather conditions based on the user's location or a selected city.
 
-First, run the development server:
+## Features
 
-```bash
+- Real-time Weather Conditions (via OpenWeatherMap API)
+- Auto Location Detection (via Geolocation API)
+- Wind Speed & Direction
+- Temperature Info with min/max details
+- Air Quality Index & Pollution Details
+- Location Switcher with 40+ cities
+- Local Time & Date based on coordinates
+- Beautiful UI with background imagery
+- Dynamic route-based architecture with `<ParallelLayout />`
+- Modular and reusable components
+- Fully responsive design for all screen sizes
+
+## Screenshots
+
+![Ecovista Screenshot](./ecovista.PNG)
+
+## Tech Stack
+
+- **Next.js (App Router)**
+- **Tailwind CSS**
+- **React (Client Components)**
+- **OpenWeatherMap API**
+- **TimeZoneDB API**
+- **BigDataCloud API**
+- **JavaScript (ES6+)**
+
+## Installation
+
+Follow these steps to set up the project locally:
+
+## 1. Clone the repository
+
+git clone https://github.com/khandoker-tahmid-sami/Ecovista.git
+
+## 2. Navigate into the project directory
+
+cd Ecovista
+
+## 3. Install project dependencies
+
+npm install
+
+## 4. Start the development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 5. Open yout browser and go to
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+http://localhost:3000
