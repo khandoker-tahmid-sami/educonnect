@@ -1,6 +1,6 @@
 # EduConnect
 
-**Ecovista** is a dynamic and responsive weather dashboard application built with **Next.js**, **Tailwind CSS**, and the **App Router** architecture. It fetches real-time environmental data like air quality, temperature, wind speed, and current weather conditions based on the user's location or a selected city.
+**EduConnect** is a modern e-learning portal built with **Next.js (App Router)**, **Tailwind CSS**, and **MongoDB**. It supports course catalogs, lessons, quizzes, progress tracking, and secure payments with a responsive, accessible UI.
 
 ## Features
 
@@ -36,6 +36,7 @@ Follow these steps to set up the project locally:
 ## 1. Clone the repository
 
 git clone https://github.com/khandoker-tahmid-sami/educonnect.git
+cd educonnect
 
 ## 2. Navigate into the project directory
 
