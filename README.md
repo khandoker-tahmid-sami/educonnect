@@ -22,10 +22,12 @@
 
 ## Tech Stack
 
-- **Next.js (App Router)**
+- **Next.js** (App Router)
 - **Tailwind CSS**
 - **MongoDB & Mongoose**
+- **NextAuth / Auth.js** (Google & GitHub providers)
 - **JWT Authentication**
+- **Nodemailer** (emails)
 - **Stripe** (payment integration)
 - **Cloudinary** (file uploads)
 
