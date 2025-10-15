@@ -1,4 +1,4 @@
-# EduConnect
+## EduConnect
 
 **EduConnect** is a modern e-learning portal built with **Next.js (App Router)**, **Tailwind CSS**, and **MongoDB**. It supports course catalogs, lessons, quizzes, progress tracking, and secure payments with a responsive, accessible UI.
 
@@ -33,20 +33,20 @@
 
 Follow these steps to set up the project locally:
 
-## 1. Clone the repository
+# 1. Clone the repository
 
 ```
 git clone https://github.com/khandoker-tahmid-sami/educonnect.git
 cd educonnect
 ```
 
-## 3. Install project dependencies
+# 2. Install project dependencies
 
 ```
 npm install
 ```
 
-## 4. Configure environment variables
+# 3. Configure environment variables
 
 ```
 MONGO_URI = your_mongodb_uri
@@ -72,13 +72,13 @@ NODEMAILER_EMAIL = your_email
 NODEMAILER_APP_PASS = your_app_pass
 ```
 
-## 5. Start the development server
+# 4. Start the development server
 
 ```
 npm run dev
 ```
 
-## 6. Open yout browser and go to
+# 5. Open yout browser and go to
 
 ```
 http://localhost:3000
