@@ -5,16 +5,6 @@
 ## Features
 
 - Real-time Weather Conditions (via OpenWeatherMap API)
-- Auto Location Detection (via Geolocation API)
-- Wind Speed & Direction
-- Temperature Info with min/max details
-- Air Quality Index & Pollution Details
-- Location Switcher with 40+ cities
-- Local Time & Date based on coordinates
-- Beautiful UI with background imagery
-- Dynamic route-based architecture with `<ParallelLayout />`
-- Modular and reusable components
-- Fully responsive design for all screen sizes
 
 ## Screenshots
 
