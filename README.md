@@ -4,7 +4,7 @@
 
 ## Features
 
-- Real-time Weather Conditions (via OpenWeatherMap API)
+- **Role-Based Access:** Secure endpoints for different user roles.
 
 ## Screenshots
 
