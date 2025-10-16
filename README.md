@@ -4,7 +4,17 @@
 
 ## Features
 
+- **User Authentication:** Login/signup with email or OAuth (Google & GitHub).
 - **Role-Based Access:** Secure endpoints for different user roles.
+- **Course Management:** Create, update, and delete courses with modules, lessons, and resources.
+- **Secure Payments:** Stripe integration for course purchases.
+- **Search & Filters:** Find courses by category, tags, or keywords.
+- **Responsive UI:** Fully mobile-friendly using Tailwind CSS.
+- **Server-Side API Routes:** Modular Next.js App Router with protected routes and server actions.
+
+<!-- Video & File Uploads: Upload course materials via Cloudinary. -->
+<!-- Quizzes & Progress Tracking: Track student performance and course completion. -->
+<!-- Reviews & Ratings: Students can review and rate courses. -->
 
 ## Screenshots
 
