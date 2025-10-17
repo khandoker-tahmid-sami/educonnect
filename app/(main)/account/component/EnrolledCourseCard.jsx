@@ -1,12 +1,20 @@
 // import { CourseProgress } from "@/components/course-progress";
 import { Badge } from "@/components/ui/badge";
 import { getCategoriesById } from "@/queries/categories";
+// import { getAReport } from "@/queries/reports";
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
-
 const EnrolledCourseCard = async ({ enrollment }) => {
   const category = await getCategoriesById(enrollment?.course?.category);
-  //   console.log(category);
+  // console.log(category);
+
+  // const filter = {
+  //   course: enrollment?.course?.id,
+  //   student: enrollment?.student,
+  // };
+
+  // const report = await getAReport(filter);
+  // console.log(report);
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
       <div className="relative w-full aspect-video rounded-md overflow-hidden">
@@ -33,7 +41,7 @@ const EnrolledCourseCard = async ({ enrollment }) => {
         <div className=" border-b pb-2 mb-2">
           <div className="flex items-center justify-between">
             <p className="text-md md:text-sm font-medium text-slate-700">
-              Total Modules: 10
+              Total Modules: {enrollment?.course?.modules?.length}
             </p>
             <p className="text-md md:text-sm font-medium text-slate-700">
               Completed Modules <Badge variant="success">05</Badge>
