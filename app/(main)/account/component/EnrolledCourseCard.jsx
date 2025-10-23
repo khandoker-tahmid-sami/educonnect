@@ -1,20 +1,36 @@
 // import { CourseProgress } from "@/components/course-progress";
 import { Badge } from "@/components/ui/badge";
 import { getCategoriesById } from "@/queries/categories";
-// import { getAReport } from "@/queries/reports";
+import { getAReport } from "@/queries/reports";
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
 const EnrolledCourseCard = async ({ enrollment }) => {
   const category = await getCategoriesById(enrollment?.course?.category);
   // console.log(category);
 
-  // const filter = {
-  //   course: enrollment?.course?.id,
-  //   student: enrollment?.student,
-  // };
+  const filter = {
+    course: enrollment?.course?._id,
+    student: enrollment?.student,
+  };
 
-  // const report = await getAReport(filter);
-  // console.log(report);
+  const report = await getAReport(filter);
+  console.log(report);
+
+  // find attempted quiz
+  const quizzesTaken = report?.quizAssessment?.assessments.filter(
+    (q) => q.attempted
+  );
+  console.log(quizzesTaken);
+
+  // const totalCorrect = quizzesTaken
+  //   .map((quiz) => {
+  //     const item = quiz.options;
+  //     return item.filter((c) => {
+  //       return c.isCorrect === true && c.isSelected === true;
+  //     });
+  //   })
+
+  // console.log(totalCorrect);
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
       <div className="relative w-full aspect-video rounded-md overflow-hidden">
@@ -44,16 +60,20 @@ const EnrolledCourseCard = async ({ enrollment }) => {
               Total Modules: {enrollment?.course?.modules?.length}
             </p>
             <p className="text-md md:text-sm font-medium text-slate-700">
-              Completed Modules <Badge variant="success">05</Badge>
+              Completed Modules{" "}
+              <Badge variant="success">
+                {report?.totalCompletedModeules?.length ?? 0}
+              </Badge>
             </p>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="text-md md:text-sm font-medium text-slate-700">
-              Total Quizzes: 10
+              Total Quizzes: {report?.quizAssessment?.assessments?.length ?? 0}
             </p>
 
             <p className="text-md md:text-sm font-medium text-slate-700">
-              Quiz taken <Badge variant="success">10</Badge>
+              Quiz taken{" "}
+              <Badge variant="success">{quizzesTaken?.length ?? 0}</Badge>
             </p>
           </div>
           <div className="flex items-center justify-between mt-2">
