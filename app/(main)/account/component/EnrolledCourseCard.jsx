@@ -22,15 +22,18 @@ const EnrolledCourseCard = async ({ enrollment }) => {
   );
   console.log(quizzesTaken);
 
-  // const totalCorrect = quizzesTaken
-  //   .map((quiz) => {
-  //     const item = quiz.options;
-  //     return item.filter((c) => {
-  //       return c.isCorrect === true && c.isSelected === true;
-  //     });
-  //   })
+  const totalCorrect = quizzesTaken?.map((quiz) => {
+      const item = quiz.options;
+      return item.filter((c) => {
+        return c.isCorrect === true && c.isSelected === true;
+      });
+    }).filter((elem) => elem.length > 0).flat()
 
-  // console.log(totalCorrect);
+  console.log(totalCorrect);
+
+  const totalMarkFromQuizzes =  (totalCorrect?.length ?? 0) * 10;
+
+  const otherMarks = report?.quizAssessment?.otherMarks ?? 0;
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
       <div className="relative w-full aspect-video rounded-md overflow-hidden">
@@ -81,14 +84,14 @@ const EnrolledCourseCard = async ({ enrollment }) => {
               Mark from Quizzes
             </p>
 
-            <p className="text-md md:text-sm font-medium text-slate-700">50</p>
+            <p className="text-md md:text-sm font-medium text-slate-700">{totalMarkFromQuizzes}</p>
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="text-md md:text-sm font-medium text-slate-700">
               Others
             </p>
 
-            <p className="text-md md:text-sm font-medium text-slate-700">50</p>
+            <p className="text-md md:text-sm font-medium text-slate-700">{otherMarks}</p>
           </div>
         </div>
         <div className="flex items-center justify-between mb-4">
@@ -96,7 +99,7 @@ const EnrolledCourseCard = async ({ enrollment }) => {
             Total Marks
           </p>
 
-          <p className="text-md md:text-sm font-medium text-slate-700">100</p>
+          <p className="text-md md:text-sm font-medium text-slate-700">{totalMarkFromQuizzes + otherMarks}</p>
         </div>
 
         {/* <CourseProgress
